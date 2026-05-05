@@ -1,0 +1,34 @@
+task:
+  name: "Infinity-X Build hotdogb"
+  timeout_in: 120m
+  container:
+    image: aospbuild/core:latest
+    cpu: 8
+    memory: 24G
+
+  env:
+    CIRRUS_WORKING_DIR: /tmp/rom
+    DEVICE: hotdogb
+
+  setup_script:
+    - mkdir -p ~/bin
+    - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+    - chmod a+x ~/bin/repo
+    - git config --global user.name "jhaidh277"
+    - git config --global user.email "jhaidh277@gmail.com"
+
+  sync_script:
+    - export PATH="$HOME/bin:$PATH"
+    - repo init -u https://github.com/Project-Infinity/manifest.git -b 16
+    - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+
+  clone_script:
+    - git clone https://github.com/Project-Infinity-Devices/device_oneplus_hotdogb.git -b 16 device/oneplus/hotdogb
+    - git clone https://github.com/Project-Infinity-Devices/vendor_oneplus_hotdogb.git -b 16 vendor/oneplus/hotdogb
+    - git clone https://github.com/Project-Infinity-Devices/kernel_oneplus_sm8150.git -b 16 kernel/oneplus/sm8150
+
+  build_script:
+    - export PATH="$HOME/bin:$PATH"
+    - source build/envsetup.sh
+    - lunch infinity_hotdogb-userdebug
+    - mka bacon
