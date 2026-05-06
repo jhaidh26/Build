@@ -19,13 +19,13 @@ task:
 
   sync_script:
     - export PATH="$HOME/bin:$PATH"
-    - repo init -u https://github.com/Project-Infinity/manifest.git -b 16
+    - repo init -u https://github.com/ProjectInfinity-X/manifest.git -b 16
     - repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 
   clone_script:
-    - git clone https://github.com/Project-Infinity-Devices/device_oneplus_hotdogb.git -b 16 device/oneplus/hotdogb
-    - git clone https://github.com/Project-Infinity-Devices/vendor_oneplus_hotdogb.git -b 16 vendor/oneplus/hotdogb
-    - git clone https://github.com/Project-Infinity-Devices/kernel_oneplus_sm8150.git -b 16 kernel/oneplus/sm8150
+    - git clone https://github.com/Infinity-X-Devices/device_oneplus_hotdogb.git -b 16 device/oneplus/hotdogb
+    - git clone https://github.com/Infinity-X-Devices/vendor_oneplus_hotdogb.git -b 16 vendor/oneplus/hotdogb
+    - git clone https://github.com/Infinity-X-Devices/kernel_oneplus_sm8150.git -b 16 kernel/oneplus/sm8150
 
   build_script:
     - export PATH="$HOME/bin:$PATH"
